@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grid Tech – Digital Product Store</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>🛍️ Grid Tech</h1>
+    <p>Your One-Stop Shop for Software, Projects, Games, and Apps</p>
+  </header>
+
+  <section id="products">
+    <h3>Featured Products</h3>
+    <div class="product-grid" id="product-list">Loading...</div>
+  </section>
+
+  <script>
+    async function loadProducts() {
+      try {
+        const res = await fetch("http://127.0.0.1:5000/api/products");
+        const products = await res.json();
+
+        const container = document.getElementById("product-list");
+        container.innerHTML = "";
+
+        products.forEach(p => {
+          const card = document.createElement("div");
+          card.className = "product-card";
+          card.innerHTML = `
+            <img src="${p.image_url}" alt="${p.title}">
+            <h4>${p.title}</h4>
+            <p>${p.description}</p>
+            <span>₹${p.price}</span><br/>
+            <button onclick="alert('Simulating payment for: ${p.title}')">Buy Now</button>
+          `;
+          container.appendChild(card);
+        });
+      } catch (err) {
+        console.error("Error loading products:", err);
+      }
+    }
+
+    window.onload = loadProducts;
+  </script>
+</body>
+</html>
