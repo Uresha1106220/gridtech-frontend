@@ -1,91 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Grid Tech - Digital Products</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f2f2f2;
-      color: #333;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-      color: #444;
-    }
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .card {
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      margin: 15px;
-      width: 300px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      overflow: hidden;
-    }
-    .card img {
-      width: 100%;
-    }
-    .card-content {
-      padding: 15px;
-    }
-    .card-content h3 {
-      margin: 0 0 10px;
-    }
-    .card-content p {
-      font-size: 14px;
-    }
-    .card-content button {
-      margin-top: 10px;
-      padding: 10px;
-      width: 100%;
-      background: #444;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .card-content button:hover {
-      background: #222;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grid Tech 🛒</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Featured Products</h1>
-  <div class="container" id="product-container">
-    Loading...
-  </div>
+  <header>
+    <h1>🛒 Grid Tech</h1>
+    <p>Explore and buy digital products easily!</p>
+  </header>
+
+  <main>
+    <h2>Featured Products</h2>
+    <div id="product-list" class="products-container">
+      <p>Loading...</p>
+    </div>
+  </main>
 
   <script>
-    fetch("https://gridtech-backend.onrender.com/products")
-      .then(response => response.json())
-      .then(products => {
-        const container = document.getElementById("product-container");
-        container.innerHTML = "";
+    const API_URL = "https://gridtech-backend.onrender.com/products";
 
-        products.forEach(product => {
+    fetch(API_URL)
+      .then((res) => res.json())
+      .then((products) => {
+        const container = document.getElementById("product-list");
+        container.innerHTML = ""; // clear "Loading..."
+        
+        products.forEach((item) => {
           const card = document.createElement("div");
-          card.className = "card";
+          card.className = "product-card";
           card.innerHTML = `
-            <img src="${product.image_url}" alt="${product.title}">
-            <div class="card-content">
-              <h3>${product.title}</h3>
-              <p>${product.description}</p>
-              <p><strong>₹${product.price}</strong></p>
-              <button>Buy Now</button>
-            </div>
+            <img src="${item.image_url}" alt="${item.title}" />
+            <h3>${item.title}</h3>
+            <p>${item.description}</p>
+            <span class="tag">${item.category} / ${item.subcategory}</span>
+            <div class="price">₹${item.price}</div>
+            <button class="buy-btn">Buy Now</button>
           `;
           container.appendChild(card);
         });
       })
-      .catch(error => {
-        document.getElementById("product-container").innerHTML = "Failed to load products.";
-        console.error("Error:", error);
+      .catch((err) => {
+        document.getElementById("product-list").innerHTML =
+          "<p style='color: red;'>⚠️ Failed to load products. Please try again later.</p>";
+        console.error("Fetch Error:", err);
       });
   </script>
 </body>
