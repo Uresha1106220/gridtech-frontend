@@ -20,14 +20,14 @@
   </main>
 
   <script>
-    const API_URL = "https://gridtech-backend.onrender.com/products";
+    const API_URL = "https://gridtech-backend.onrender.com/api/products";
 
     fetch(API_URL)
       .then((res) => res.json())
       .then((products) => {
         const container = document.getElementById("product-list");
-        container.innerHTML = ""; // clear "Loading..."
-        
+        container.innerHTML = "";
+
         products.forEach((item) => {
           const card = document.createElement("div");
           card.className = "product-card";

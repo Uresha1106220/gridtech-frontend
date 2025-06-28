@@ -27,9 +27,11 @@ main {
   padding: 2rem;
 }
 
-h2 {
+main h1 {
   text-align: center;
   margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #222;
 }
 
 .products-container {
@@ -41,7 +43,7 @@ h2 {
 .product-card {
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   padding: 1rem;
   text-align: center;
   transition: transform 0.2s;
@@ -60,6 +62,8 @@ h2 {
 
 .product-card h3 {
   margin: 1rem 0 0.5rem;
+  font-size: 1.2rem;
+  color: #111;
 }
 
 .product-card p {
@@ -67,6 +71,7 @@ h2 {
   color: #555;
   height: 48px;
   overflow: hidden;
+  margin: 0.5rem 0;
 }
 
 .tag {
@@ -81,7 +86,7 @@ h2 {
 
 .price {
   font-size: 1.2rem;
-  color: #222;
+  color: #007bff;
   margin-top: 0.8rem;
   font-weight: bold;
 }
@@ -94,6 +99,7 @@ h2 {
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 0.95rem;
 }
 
 .buy-btn:hover {
